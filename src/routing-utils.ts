@@ -1,4 +1,4 @@
-const canBeTransformed = (word1: string, word2: string) => {
+const canBeTransformed = (word1: string, word2: string): boolean => {
   let counter = 0;
 
   for (let i = 0; i < 4; i++) {
@@ -16,7 +16,7 @@ const canBeTransformed = (word1: string, word2: string) => {
 
 const getToWords = (
   fromWord: string,
-  words: Set<string>,
+  words: Array<string>,
   exculdedWords: Set<string>
 ): Array<string> => {
   const result: Array<string> = [];
@@ -42,7 +42,7 @@ interface IRoutingTableEntry {
 
 export const fillWordRoutingTable = (
   word: string,
-  words: Set<string>,
+  words: Array<string>,
   excludedWords = new Set<string>(),
   wordsHistory: Array<string> = []
 ): Array<IRoutingTableEntry> => {
