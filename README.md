@@ -1,4 +1,4 @@
-# shortest-way
+# How to find least transformations number between two 4 letter words
 This task can be asked during hiring interview, e.g. in Amazon Web Services (AWS). 
 The task is following:
 There is a known set of all English words consisting of 4 letters.
