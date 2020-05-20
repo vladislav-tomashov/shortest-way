@@ -49,6 +49,8 @@ export const pathToWord = (
     toWords.push(word);
   }
 
+  let shortestPath: Array<string> | undefined = undefined;
+
   for (let i = 0; i < toWords.length; i++) {
     const toWord = toWords[i];
     const nextPath = [...initialPath, toWord];
@@ -61,11 +63,13 @@ export const pathToWord = (
     );
 
     if (path !== nextPath) {
-      return path;
+      if (!shortestPath || path.length < shortestPath.length) {
+        shortestPath = path;
+      }
     }
   }
 
-  return initialPath;
+  return shortestPath || initialPath;
 };
 
 export const getPathBetweenWords = (
