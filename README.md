@@ -1,7 +1,7 @@
 # shortest-way
-I heard a task from AWS. The task is following:
+This task can be asked diring hiring interview. The task is following:
 There is a known set of all English words consisting of 4 letters.
-What is minimal transformations number from "POOL" to "SEAL".
-A transformation is defined as one letter change in the word that produces another word from the set.
+What is minimal transformations number from word "POOL" to word "SEAL".
+A transformation is a one letter change in the word that produces another word.
 
-This code contains my implementation of this task in TypeScript.
+In this repository you can find my implementation of a solution for this task.
