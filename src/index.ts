@@ -1,8 +1,8 @@
 import { getPathBetweenWords } from "./routing-utils";
 import allWords from "./words";
 
-const fromWord = "AAAA";
-const toWord = "ADBC";
+const fromWord = "POOL";
+const toWord = "SEAL";
 
 const path = getPathBetweenWords(fromWord, toWord, allWords);
 
