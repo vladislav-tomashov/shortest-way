@@ -1,5 +1,6 @@
 # shortest-way
-This task can be asked diring hiring interview. The task is following:
+This task can be asked during hiring interview, e.g. in Amazon Web Services (AWS). 
+The task is following:
 There is a known set of all English words consisting of 4 letters.
 What is minimal transformations number from word "POOL" to word "SEAL".
 A transformation is a one letter change in the word that produces another word.

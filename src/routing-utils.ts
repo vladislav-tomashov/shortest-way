@@ -1,103 +1,77 @@
-const canBeTransformed = (word1: string, word2: string): boolean => {
+const canBeTransformed = (word1: string, word2: string, delta = 1): boolean => {
   let counter = 0;
 
-  for (let i = 0; i < 4; i++) {
+  const { length: wordLength } = word1;
+
+  if (word2.length !== wordLength) {
+    throw new Error(`Words ${word1} and ${word2} have different length`);
+  }
+
+  for (let i = 0; i < wordLength; i++) {
     if (word1[i] !== word2[i]) {
       counter++;
 
-      if (counter > 1) {
+      if (counter > delta) {
         return false;
       }
     }
   }
 
-  return counter === 1;
+  return counter === delta;
 };
 
-const getToWords = (
+export const pathToWord = (
   fromWord: string,
-  words: Array<string>,
-  exculdedWords: Set<string>
-): Array<string> => {
-  const result: Array<string> = [];
-
-  words.forEach((word) => {
-    if (exculdedWords.has(word)) {
-      return;
-    }
-
-    if (canBeTransformed(word, fromWord)) {
-      result.push(word);
-    }
-  });
-
-  return result;
-};
-
-interface IRoutingTableEntry {
-  fromWord: string;
-  toWord: string;
-  distance: number;
-}
-
-export const fillWordRoutingTable = (
-  word: string,
-  words: Array<string>,
+  destinationWord: string,
+  allWords: Array<string>,
   excludedWords = new Set<string>(),
-  wordsHistory: Array<string> = []
-): Array<IRoutingTableEntry> => {
-  const table: Array<IRoutingTableEntry> = [];
+  initialPath: Array<string> = []
+): Array<string> => {
+  const toWords: Array<string> = [];
 
-  if (excludedWords.has(word)) {
-    return table;
+  excludedWords.add(fromWord);
+
+  for (let i = 0; i < allWords.length; i++) {
+    const word = allWords[i];
+
+    if (excludedWords.has(word)) {
+      continue;
+    }
+
+    if (!canBeTransformed(word, fromWord)) {
+      continue;
+    }
+
+    if (word === destinationWord) {
+      return [...initialPath, word];
+    }
+
+    toWords.push(word);
   }
 
-  excludedWords.add(word);
-
-  const toWords = getToWords(word, words, excludedWords);
-
-  toWords.forEach((toWord) => {
-    table.push({
-      fromWord: word,
+  for (let i = 0; i < toWords.length; i++) {
+    const toWord = toWords[i];
+    const nextPath = [...initialPath, toWord];
+    const path = pathToWord(
       toWord,
-      distance: 1,
-    });
-  });
+      destinationWord,
+      allWords,
+      excludedWords,
+      nextPath
+    );
 
-  wordsHistory.forEach((historyWord, index) => {
-    toWords.forEach((toWord) => {
-      table.push({
-        fromWord: historyWord,
-        toWord,
-        distance: 2 + index,
-      });
-    });
-  });
+    if (path !== nextPath) {
+      return path;
+    }
+  }
 
-  toWords.forEach((toWord) => {
-    const toWordTable = fillWordRoutingTable(toWord, words, excludedWords, [
-      word,
-      ...wordsHistory,
-    ]);
-    table.push(...toWordTable);
-  });
-
-  return table;
+  return initialPath;
 };
 
-export const getKey = (fromWord: string, toWord: string): string => {
-  return `${fromWord}->${toWord}`;
-};
-
-export const createIndexFromRoutingTable = (
-  routingTable: Array<IRoutingTableEntry>
-): { [key: string]: number } => {
-  const result: { [key: string]: number } = {};
-
-  routingTable.forEach(({ fromWord, toWord, distance }) => {
-    result[getKey(fromWord, toWord)] = distance;
-    result[getKey(toWord, fromWord)] = distance;
-  });
-
-  return result;
+export const getPathBetweenWords = (
+  fromWord: string,
+  toWord: string,
+  allWords: Array<string>
+): Array<string> => {
+  return pathToWord(fromWord, toWord, allWords);
 };

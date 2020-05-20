@@ -1,16 +1,16 @@
-import {
-  fillWordRoutingTable,
-  createIndexFromRoutingTable,
-  getKey,
-} from "./routing-utils";
-import { words } from "./words";
+import { getPathBetweenWords } from "./routing-utils";
+import allWords from "./words";
 
-const table = fillWordRoutingTable("AAAA", words);
-const index = createIndexFromRoutingTable(table);
+const fromWord = "AAAA";
+const toWord = "ADBC";
 
-const key = getKey("AAAA", "ADBC");
-const min = index[key];
+const path = getPathBetweenWords(fromWord, toWord, allWords);
 
-console.log(table);
+const message = path.length
+  ? `Minimal transformation number is ${path.length}: ${[
+      fromWord,
+      ...path,
+    ].join("->")}`
+  : `There is no way to get from "${fromWord}" to "${toWord}"`;
 
-console.log(key, min);
+console.log(message);
