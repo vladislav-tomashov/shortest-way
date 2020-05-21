@@ -1,4 +1,4 @@
-# Solution to shortest way (or least transformations number) task between two 4 letter English words
+# Solution to shortest way (or least transformations number) task between two 4 letter words
 
 ## Task description
 
