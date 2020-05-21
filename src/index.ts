@@ -1,15 +1,15 @@
-import { getPathBetweenWords } from "./routing-utils";
+import { getShortestPathBetweenNodes } from "./utils";
 import allWords from "./words";
 
 const fromWord = "POOL";
 const toWord = "SEAL";
 
-const path = getPathBetweenWords(fromWord, toWord, allWords);
+const path = getShortestPathBetweenNodes(fromWord, toWord, allWords);
 
 const message = path.length
   ? `Minimal transformation number from "${fromWord}" to "${toWord}" is ${
-      path.length
-    }: ${[fromWord, ...path].join("->")}`
+      path.length - 1
+    }: ${path.join("->")}`
   : `There is no way to get from "${fromWord}" to "${toWord}"`;
 
 console.log(message);
