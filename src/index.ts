@@ -14,4 +14,5 @@ const message = path.length
     }: ${path.join("->")}`
   : `There is no way to get from "${fromWord}" to "${toWord}"`;
 
+console.log(`Words number: ${allWords.length}`);
 console.log(message);

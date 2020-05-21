@@ -25,5 +25,7 @@ const toWord = "ROCK";
 ## Output/results
 Output sample:
 ```
+Search time: 88.845ms
+Words number: 5526
 Minimal transformation number from "POOL" to "SEAL" is 4: POOL->FOOL->FOAL->FEAL->SEAL
 ```
