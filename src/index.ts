@@ -4,7 +4,9 @@ import allWords from "./words";
 const fromWord = "POOL";
 const toWord = "SEAL";
 
+console.time("Search time");
 const path = getShortestPathBetweenNodes(fromWord, toWord, allWords);
+console.timeEnd("Search time");
 
 const message = path.length
   ? `Minimal transformation number from "${fromWord}" to "${toWord}" is ${
